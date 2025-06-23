@@ -1,0 +1,15 @@
+cookie:
+  expiry_days: 30
+  key: your_secret_cookie_key_here
+  name: streamlit_auth
+
+credentials:
+  usernames:
+    demo_user_1:
+      email: user1@example.com
+      name: Demo User One
+      password: $2b$12$examplepasswordhashhere111111111111111111111111111111
+    demo_user_2:
+      email: user2@example.com
+      name: Demo User Two
+      password: $2b$12$examplepasswordhashhere222222222222222222222222222222
