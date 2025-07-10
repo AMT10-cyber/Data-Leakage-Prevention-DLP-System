@@ -1,8 +1,8 @@
 # Data Leakage Prevention (DLP) System
 
-A secure, web-based system for detecting and redacting sensitive **PII** (Personally Identifiable Information) and **HII** (Health Information Identifiers) from structured and unstructured datasets using rule-based logic and NLP.
+A secure, web-based system for detecting and redacting sensitive **PII** (Personally Identifiable Information) and **HII** (Health Information Identifiers) from both structured and unstructured datasets using rule-based logic and NLP.
 
-This Streamlit-powered app offers user authentication, real-time registration, encrypted exports, and support for both tabular and descriptive data via CSV uploads.
+This Streamlit-powered application offers user authentication, encrypted downloads, real-time redaction, and flexible upload support for tabular and descriptive data through `.csv` files.
 
 ---
 
@@ -10,31 +10,31 @@ This Streamlit-powered app offers user authentication, real-time registration, e
 
 ### 1. User Management
 
-* Secure login/logout with session management
+* Secure login/logout with session tracking
+* Self-registration built into the UI
 * Passwords hashed using `bcrypt`
-* Self-registration through the app
-* Credentials stored securely in a YAML file
+* Credentials stored securely in a local YAML file
 
 ### 2. Upload & Detection
 
-* Upload custom `.csv` files via the app interface
-* Two detection engines:
+* Upload custom `.csv` datasets directly via the app
+* Dual detection engines:
 
-  * **Tabular**: For structured fields like name, email, address, etc.
-  * **Descriptive**: Uses spaCy Transformer NER (`en_core_web_trf`) for free-text detection
-* Automatically categorizes entities into PII and HII
+  * **Tabular Engine**: For structured fields like `fname`, `email`, `phone`, etc.
+  * **Descriptive Engine**: For free-form text using spaCy’s `en_core_web_trf` transformer NER model
+* Automatic classification into **PII** and **HII** categories
 
 ### 3. Redaction & Security
 
-* Real-time redaction of selected entity types
-* Redacted entities are masked as `[REDACTED]`
-* AES-encrypted ZIP export of redacted data
+* On-demand redaction of selected entity types
+* Masked output using `[REDACTED]` format
+* Export detected data securely as an **AES-encrypted ZIP**
 
 ### 4. Visualization & Filtering
 
-* WordCloud visualization of all detected entities
-* Sidebar filters by entity type and keyword
-* Download filtered or redacted data securely
+* WordCloud visualization of detected entities
+* Sidebar filtering by entity type and keyword
+* Download either original or redacted results
 
 ---
 
@@ -51,7 +51,7 @@ cd Data-Leakage-Prevention-DLP-System
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
@@ -70,52 +70,63 @@ python -m spacy download en_core_web_trf
 
 ## Meilisearch Setup (Optional but Recommended)
 
-The app uses [Meilisearch](https://www.meilisearch.com/) for lightning-fast indexing and search of detected PII/HII entities.
+The app can optionally use [Meilisearch](https://www.meilisearch.com/) for fast indexing and search of detected entities.
 
-### Step 1: Download Meilisearch (One-time Setup)
+### Step 1: Install Meilisearch
 
 ```bash
 curl -L https://install.meilisearch.com | sh
 ```
 
-Or download it manually from [https://www.meilisearch.com/download](https://www.meilisearch.com/download)
+Or manually download from [meilisearch.com/download](https://www.meilisearch.com/download)
 
-### Step 2: Start Meilisearch in a New Terminal
+### Step 2: Run Meilisearch
+
+In a separate terminal:
 
 ```bash
 ./meilisearch --master-key your_master_key
 ```
 
-> Keep this terminal running. Meilisearch is optional — the app works even without it, but search and indexing will be disabled.
+> Meilisearch is optional. If it's not running, search and indexing features will be disabled.
 
 ---
 
-### 5. Run the App
-
-Open a **new terminal window** and run:
+### 5. Run the Application
 
 ```bash
 streamlit run main.py
 ```
 
-Then visit [http://localhost:8501](http://localhost:8501) in your browser.
+Then open your browser at [http://localhost:8501](http://localhost:8501)
 
 ---
 
 ## Upload Instructions
 
-* Supported File Format: `.csv`
-* **Tabular Engine**: Requires structured fields like `fname`, `lname`, `email`, `phone`, etc.
-* **Descriptive Engine**: Requires a `text` column containing unstructured paragraphs
+* Accepted file type: `.csv`
+* **Tabular Engine** requires fields like:
+  `fname`, `lname`, `email`, `phone`, `address`, etc.
+* **Descriptive Engine** requires a `text` column with free-form content
 
 ---
 
-## Redaction & Download
+## Sample Data
 
-* Redact specific entity types by selecting them in the sidebar
-* Redacted fields are replaced with `[REDACTED]`
-* Export results securely as an **AES-encrypted ZIP file**
-* Temporary files are cleaned periodically
+Sample files are available in the `sample_data/` folder for testing:
+
+* `PII_HII_Dataset.csv` – for **Tabular Engine**
+* `pii_dataset.csv` – for **Descriptive Engine**
+
+Use them to try out the detection and redaction features quickly.
+
+---
+
+## Redaction & Secure Export
+
+* Redact chosen entity types via sidebar controls
+* Fields will be masked as `[REDACTED]`
+* Optionally export the data as an AES-encrypted ZIP file
 
 ---
 
