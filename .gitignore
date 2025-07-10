@@ -42,7 +42,7 @@ pip-wheel-metadata/
 MANIFEST
 
 # ============================================
-# Logs and Runtime
+# Logs and Runtime Files
 # ============================================
 *.log
 *.pid
@@ -52,14 +52,14 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # ============================================
-# Environment & Secrets
+# Environment Variables / Secrets
 # ============================================
 .env
 .env.*
 
 # ============================================
 # IDEs & Editors
-# ============================================
+# --------------------------------------------
 # PyCharm
 .idea/
 # VS Code
@@ -75,7 +75,7 @@ pip-delete-this-directory.txt
 .ipynb_checkpoints
 
 # ============================================
-# Documentation & Build
+# Docs / Static Sites
 docs/_build/
 site/
 
@@ -103,12 +103,12 @@ coverage.xml
 
 # ============================================
 # DLP Project Specific Ignores
-# ============================================
+# --------------------------------------------
 secure_data.zip
 uploaded_files.json
 processed_pii_hii_data.json
 tmp/
 tmp/*
 
-# Uncomment if using Meilisearch locally with persistence
+# Optional: If using Meilisearch local persistence
 # meili_data/
