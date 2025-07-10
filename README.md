@@ -95,7 +95,7 @@ Or download it manually from [https://www.meilisearch.com/download](https://www.
 Open a **new terminal window** and run:
 
 ```bash
-streamlit run maincode.py
+streamlit run main.py
 ```
 
 Then visit [http://localhost:8501](http://localhost:8501) in your browser.
